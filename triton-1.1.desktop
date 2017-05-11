@@ -1,0 +1,13 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Terminal=false
+Icon=/usr/local/share/neptune-triton-1.1/triton.icon.png
+Exec=triton11
+Name=Triton 1.1.0 - fractal expander
+Categories=Graphics;Math;
+
+Name[en_GB]=Triton 1.1.0 - fractal expander

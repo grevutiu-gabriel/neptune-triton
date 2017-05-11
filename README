@@ -1,0 +1,153 @@
+Neptune & Triton 1.1.x
+
+Copyright (c) 2014 M.R.Eggleston
+
+------------------------------------------------------------------------
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc.:
+        59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+------------------------------------------------------------------------
+
+This software is currently maintained by mark_r_eggleston@yahoo.co.uk
+
+Examples of pictures created using this software can be found at:
+
+http://mark-eggleston.artistwebsites.com
+http://redbubble.com/people/element90
+
+There is also a blog relating to Neptune and Triton (and the related
+programs Saturn and Titan) at:
+
+http://element90.wordpress.com
+
+The PDF user manuals, PDF user guide and example seed files can be found at:
+
+http://element90.wordpress.com/software/downloads
+
+Requirements
+------------
+
+For successful installation you MUST have a C++ compiler capable of supporting
+C++ 11 standard features. You will also require:
+
+Qt 4
+boost libraries at least 1.40
+gmp
+mpfr
+
+you'll also need to install the C++ compiler and make.
+
+This software has been been tested on x86 and x86_64 Linux, it may be possible
+to build Saturn on non-Linux systems but I can't guarantee success.
+
+Your system should have at least 1 Gigabyte of RAM, preferably more. A 64-bit
+processor and a 64-bit Linux distribution are also preferred.
+
+Installation
+------------
+
+To install from source code assuming the archive was unpacked in the user's home
+folder (replace x with actual final part of the version number):
+
+    cd neptune-triton-1.1.x  
+    ./configure CXXFLAGS="-O2"
+    make
+
+If configure or make fail see "problems" below.
+
+Now that the program has been built it needs to be installed for which you will
+need root (administrator) privileges, using either su or sudo depending on your
+installation:
+
+    su
+    make install
+    exit
+
+or
+
+    sudo make install
+
+Problems
+--------
+
+Where both Qt 5 and Qt 4 are installed Qt 5 may take precedence and Neptune and
+Triton will fail to build. Linux Mint has a work around, installing qt4-default
+will change the default Qt to Qt 4 which will allow Neptune and Triton to be
+built. To install any software from source that required Qt 5 installing
+qt5-default will change the default back to Qt 5. (Works for Linux Mint 15 and
+16, it may also work for other versions of the Linux Mint).
+
+This problem may exist for other Linux distributions, if it does I don't know of
+any solutions.
+
+Boost Libraries
+---------------
+
+Configure may finish with this:
+
+    checking whether the Boost::Thread library is available... yes
+    configure: error: Could not find a version of the library!
+
+If it does the location of the boost libraries needs to be specified (search for
+libboost*.so). On 64-bit Linux Mint 17 the configure command line becomes:
+
+    ./configure CXXFLAGS="-O2" --with-boost-libdir=/usr/lib/x86_64-linux-gnu
+
+Qt
+--
+
+Configure may end with the message:
+
+    configure: error: Cannot find qmake in your PATH. Try using -with-qt.
+
+If this happens find the folder that contains qmake, if the directory is
+/usr/lib64/qt4/bin then the --with-qt option needs to be added when running
+configure, e.g:
+
+    ./configure CXXFLAGS="-O2" --with-qt=/usr/lib64/qt4/bin
+
+
+Installation of required packages on Fedora
+-------------------------------------------
+
+C++ needs to be installed:
+
+yum install gcc
+yum install gcc-c++
+
+OR
+
+yum install clang
+
+Qt, Boost and Multi-precision libraries
+
+yum install boost-devel
+yum install qt-devel
+yum install gmp-devel
+yum install mpfr-devel
+
+
+Clang++ compiler
+----------------
+
+The C++ compiler will default to g++, if you want to use clang++ instead the
+configure command becomes:
+
+    ./configure CXX=clang++ CXXFLAGS="-02"
+
+If you get errors relating to the undeclared identifier '__float128' then
+-D__STRICT_ANSI__ should added to CXXFLAGS:
+
+    ./configure CXX=”clang++” CXXFLAGS=”-O2 -D__STRICT_ANSI__”
+

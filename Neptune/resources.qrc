@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RCC version="1.0">
+    <qresource>
+        <file>images/neptune.icon.png</file>
+        <file>images/splash.png</file>
+    </qresource>
+</RCC>
